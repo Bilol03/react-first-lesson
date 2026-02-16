@@ -1,43 +1,50 @@
 import { Component } from 'react'
 import './button.css'
 
-// export function Button() {
-//     return <div>
-//         <button >Submit</button>
-//         <p>0</p>
-//     </div>
-// }
-
 export class Button extends Component {
+	state: any
 	constructor(props: any) {
 		super(props)
 		this.state = {
 			counter: 10,
+            age: ''
 		}
 	}
 
-    increaseBtn = () => {
-        this.setState(prevState => ({
-            counter: prevState.counter += 1
+	increaseBtn = () => {
+		this.setState((prevState: any) => ({
+			counter: (prevState.counter += 1),
+		}))
+	}
+	decreaseBtn = () => {
+		this.setState((prevState: any) => ({
+			counter: prevState.counter > 0 ? (prevState.counter -= 1) : 0,
+		}))
+	}
+	restartBtn = () => {
+		this.setState(() => ({
+			counter: 0,
+		}))
+	}
+
+	onChange = (el: any) => {
+        this.setState(( ) => ({
+            age:  el.target.value
         }))
-    }
-    decreaseBtn = () => {
-        this.setState(prevState => ({
-            counter: prevState.counter > 0 ? prevState.counter -= 1 : 0
-        }))
-    }
-    restartBtn = () => {
-        this.setState(prevState => ({
-            counter: 0
-        }))
-    }
+	}
 	render() {
 		return (
 			<div>
-				<button  onClick={this.increaseBtn}>Increament</button>
+                <h4>Sizning Yoshingiz: {this.state.age}</h4>
+				<button onClick={this.increaseBtn}>Increament</button>
 				<button onClick={this.decreaseBtn}>Decreament</button>
 				<button onClick={this.restartBtn}>Restart</button>
 				<p>{this.state.counter}</p>
+
+				<form>
+					<span>Yoshingiz</span>
+					<input type="text" onChange={this.onChange} />
+				</form>
 			</div>
 		)
 	}
