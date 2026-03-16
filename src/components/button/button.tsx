@@ -1,6 +1,5 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import './button.css'
-
 
 export const Button = () => {
 	let [counter, setCounter]: any = useState(0)
@@ -17,6 +16,11 @@ export const Button = () => {
 	const onRestart = (): any => {
 		return setCounter(0)
 	}
+	
+	useEffect(() => {
+		document.title = counter
+		console.log('effect')
+	})
 
 	return (
 		<div>
