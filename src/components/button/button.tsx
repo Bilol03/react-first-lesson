@@ -1,51 +1,35 @@
-import { Component } from 'react'
+import { useState } from 'react'
 import './button.css'
 
-export class Button extends Component {
-	state: any
-	constructor(props: any) {
-		super(props)
-		this.state = {
-			counter: 10,
-            age: ''
-		}
+
+export const Button = () => {
+	let [counter, setCounter]: any = useState(0)
+	const [age] = useState(20)
+
+	const onIncrease = (): any => {
+		setCounter((prevCounter: any) => prevCounter + 1)
 	}
 
-	increaseBtn = () => {
-		this.setState((prevState: any) => ({
-			counter: (prevState.counter += 1),
-		}))
-	}
-	decreaseBtn = () => {
-		this.setState((prevState: any) => ({
-			counter: prevState.counter > 0 ? (prevState.counter -= 1) : 0,
-		}))
-	}
-	restartBtn = () => {
-		this.setState(() => ({
-			counter: 0,
-		}))
+	const onDecrease = (): any => {
+		if (counter > 0) setCounter((prevCounter: any) => prevCounter - 1)
 	}
 
-	onChange = (el: any) => {
-        this.setState(( ) => ({
-            age:  el.target.value
-        }))
+	const onRestart = (): any => {
+		return setCounter(0)
 	}
-	render() {
-		return (
-			<div>
-                <h4>Sizning Yoshingiz: {this.state.age}</h4>
-				<button onClick={this.increaseBtn}>Increament</button>
-				<button onClick={this.decreaseBtn}>Decreament</button>
-				<button onClick={this.restartBtn}>Restart</button>
-				<p>{this.state.counter}</p>
 
-				<form>
-					<span>Yoshingiz</span>
-					<input type="text" onChange={this.onChange} />
-				</form>
-			</div>
-		)
-	}
+	return (
+		<div>
+			<h4>Sizning Yoshingiz: {age}</h4>
+			<button onClick={onIncrease}>Increament</button>
+			<button onClick={onDecrease}>Decreament</button>
+			<button onClick={onRestart}>Restart</button>
+			<p>{counter}</p>
+
+			<form>
+				<span>Yoshingiz</span>
+				<input type="text" />
+			</form>
+		</div>
+	)
 }
